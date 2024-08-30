@@ -1,4 +1,4 @@
-package com.ikimaka.whetherapp.ui.theme
+package com.ikimaka.whetherapp.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
