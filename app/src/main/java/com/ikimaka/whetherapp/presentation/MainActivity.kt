@@ -4,30 +4,32 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.arkivanov.decompose.defaultComponentContext
+import com.ikimaka.whetherapp.WeatherApp
 import com.ikimaka.whetherapp.data.network.api.ApiFactory
+import com.ikimaka.whetherapp.presentation.root.DefaultRootComponent
+import com.ikimaka.whetherapp.presentation.root.RootContent
 import com.ikimaka.whetherapp.presentation.ui.theme.WhetherAppTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var rootComponentFactory: DefaultRootComponent.Factory
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        (applicationContext as WeatherApp).applicationComponent.inject(this)
+
         super.onCreate(savedInstanceState)
 
-        val apiService = ApiFactory.apiService
-
-        CoroutineScope(Dispatchers.Main).launch {
-            val currentWeather = apiService.loadCurrentWeather("London")
-            val forecast = apiService.loadForecast("London")
-            val cities = apiService.searchCity("London")
-
-            Log.d("MainActivity_Test", "Current Weather: $currentWeather\nForecast Weather: $forecast\nCities: $cities")
-        }
+        val root = rootComponentFactory.create(defaultComponentContext())
 
         setContent {
-            WhetherAppTheme {
-
-            }
+            RootContent(component = root)
         }
     }
 }

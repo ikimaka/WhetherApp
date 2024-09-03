@@ -1,12 +1,15 @@
 package com.ikimaka.whetherapp.di
 
 import android.content.Context
+import com.ikimaka.whetherapp.presentation.MainActivity
 import dagger.BindsInstance
 import dagger.Component
 
 @ApplicationScope
 @Component(modules = [DataModule::class, PresentationModule::class])
 interface ApplicationComponent {
+
+    fun inject(activity: MainActivity)
 
 
     @Component.Factory
