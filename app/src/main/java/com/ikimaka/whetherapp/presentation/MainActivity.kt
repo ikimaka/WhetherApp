@@ -7,6 +7,8 @@ import androidx.activity.compose.setContent
 import com.arkivanov.decompose.defaultComponentContext
 import com.ikimaka.whetherapp.WeatherApp
 import com.ikimaka.whetherapp.data.network.api.ApiFactory
+import com.ikimaka.whetherapp.domain.usecase.ChangeFavouriteStateUseCase
+import com.ikimaka.whetherapp.domain.usecase.SearchCityUseCase
 import com.ikimaka.whetherapp.presentation.root.DefaultRootComponent
 import com.ikimaka.whetherapp.presentation.root.RootContent
 import com.ikimaka.whetherapp.presentation.ui.theme.WhetherAppTheme
